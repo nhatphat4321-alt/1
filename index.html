@@ -1,42 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Games I Can Recommend You</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Interactive Photo Gallery</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    .gallery {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+    img {
+      width: 200px;
+      height: auto;
+      border-radius: 10px;
+      transition: transform 0.3s;
+    }
+    img:focus {
+      outline: 3px solid #0078ff;
+    }
+  </style>
 </head>
 <body>
+  <h1>Interactive Photo Gallery</h1>
+  <div class="gallery">
+    <img src="d:\559267444_820987597154135_1109892088151937532_n.jpg" alt="Image description 1" />
+    <img src="d:\FB_IMG_1753960219647.jpg" alt="Image description 2" />
+    <img src="d:\FB_IMG_1746594504392.jpg" alt="Image description 3" />
+    <img src="d:\FB_IMG_1746444635217.jpg" alt="Image description 4" />
+    <img src="d:\FB_IMG_1709686140199.jpg" alt="Image description 5" />
+    <img src="d:\FB_IMG_1710217560080.jpg" alt="Image description 6" />
+  </div>
 
-  <!-- Skip link -->
-  <a class="skip-link" href="#maincontent">Skip to Main Content</a>
+  <script>
+    // onload event
+    window.onload = addTabFocus;
 
-  <header>
-    <h1>My Games I Can Recommend You</h1>
-  </header>
+    function addTabFocus() {
+      console.log("onload triggered: adding tabindex to images");
+      const images = document.querySelectorAll("img");
 
-  <nav>
-    <img src="logo.png" alt="Site Logo">
-    <ul>
-      <li><a href="index.html">Home</a></li>
-      <li><a href="about.html">Games</a></li>
-      <li><a href="contact.html">Contact</a></li>
-    </ul>
-  </nav>
+      for (let i = 0; i < images.length; i++) {
+        images[i].setAttribute("tabindex", "0");
+        addEvents(images[i]);
+      }
+    }
 
-  <main id="maincontent" class="grid">
-    <section>
-      <h2>Welcome!</h2>
-      <p>Here are some of my favorite games that I recommend to everyone who loves adventure, action, and fun!</p>
-    </section>
-    <section>
-      <img src="games.jpg" alt="Game collage">
-    </section>
-  </main>
+    function addEvents(img) {
+      // Mouse events already required
+      img.addEventListener("mouseover", function () {
+        img.style.transform = "scale(1.1)";
+        console.log("mouseover triggered");
+      });
 
-  <footer>
-    <p>© 2025 My Game List | Made with ❤️ by Me</p>
-  </footer>
+      img.addEventListener("mouseleave", function () {
+        img.style.transform = "scale(1)";
+        console.log("mouseleave triggered");
+      });
 
+      // New focus + blur events
+      img.addEventListener("focus", function () {
+        img.style.transform = "scale(1.1)";
+        console.log("focus triggered");
+      });
+
+      img.addEventListener("blur", function () {
+        img.style.transform = "scale(1)";
+        console.log("blur triggered");
+      });
+    }
+  </script>
 </body>
 </html>
